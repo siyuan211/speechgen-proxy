@@ -51,15 +51,43 @@ exports.handler = async function(event) {
     }
   );
   const data = await response.json();
-  if (!data.file_mp3) {
+  if (!data.prj_id) {
     return {
       statusCode: 500,
       body: JSON.stringify(data)
     };
   }
-  const mp3 = await fetch(
-    "https://speechgen.io/" + data.file_mp3
+  // 等待语音生成
+  await new Promise(resolve => setTimeout(resolve, 3000));
+  const player = await fetch(
+    "https://speechgen.io/index.php?r=site/LoadPlayer&id=" 
+    + data.prj_id 
+    + "&lang=zh",
+    {
+      headers: {
+        "Cookie": "PHPSESSID=jud0pq1c951ehjth5l7fojisbf",
+        "User-Agent": "Mozilla/5.0"
+      }
+    }
   );
+  const html = await
+  player.text();
+  const match = html.match(
+    /data-track="([^"]+\.mp3)"/
+  );
+  if (!match) {
+    return {
+      statusCode: 500,
+      body: html
+    };
+  }
+  const mp3Url = "https://speechgen.io" + match[1];
+  const mp3 = await fetch(mp3Url, {
+    headers: {
+      "Cookie": "PHPSESSID=jud0pq1c951ehjth5l7fojisbf",
+      "User-Agent": "Mozilla/5.0"
+    }
+  });
   const buffer = await mp3.arrayBuffer();
   return {
     statusCode: 200,
