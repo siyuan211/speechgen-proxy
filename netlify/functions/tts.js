@@ -35,7 +35,11 @@ exports.handler = async function(event) {
       popup_cptch: 0
     })
   );
-  headers: {
+  const response = await fetch(
+    "https://speechgen.io/index.php?r=tts/TextToMp3Add&lang=zh",
+    {
+      method: "POST",
+      headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         "Cookie": cookie || "",
         "Origin": "https://speechgen.io",
