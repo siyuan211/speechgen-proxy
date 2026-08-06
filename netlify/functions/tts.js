@@ -35,18 +35,14 @@ exports.handler = async function(event) {
       popup_cptch: 0
     })
   );
-  const response = await fetch(
-    "https://speechgen.io/index.php?r=tts/TextToMp3Add&lang=zh",
-    {
-      method: "POST",
-      headers: {
-  "Content-Type": "application/x-www-form-urlencoded",
-  "Cookie": cookie || "",
-  "Origin": "https://speechgen.io",
-  "Referer": "https://speechgen.io/zh/tts-japanese/",
-  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36",
-  "Accept": "*/*"
-}
+  headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie": cookie || "",
+        "Origin": "https://speechgen.io",
+        "Referer": "https://speechgen.io/zh/tts-japanese/",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36",
+        "Accept": "*/*"
+      },
       body: params
     }
   );
