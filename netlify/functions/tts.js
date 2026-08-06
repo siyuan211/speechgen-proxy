@@ -1,6 +1,6 @@
 const fs = require("fs");
+const { EdgeTTS } = require("edge-tts-universal");
 exports.handler = async function(event) {
-  const { EdgeTTS } = await import("edge-tts");
   const text = event.queryStringParameters.text;
   if (!text) {
     return {

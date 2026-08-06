@@ -19,6 +19,6 @@
   },
   "homepage": "https://github.com/siyuan211/speechgen-proxy#readme",
   "dependencies": {
-    "edge-tts": "^1.0.1"
+    "edge-tts-universal": "^1.4.0"
   }
 }
