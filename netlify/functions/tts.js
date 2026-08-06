@@ -1,5 +1,6 @@
-const { EdgeTTS } = require("edge-tts");
+const fs = require("fs");
 exports.handler = async function(event) {
+  const { EdgeTTS } = await import("edge-tts");
   const text = event.queryStringParameters.text;
   if (!text) {
     return {
@@ -15,7 +16,6 @@ exports.handler = async function(event) {
   const audio = await tts.toFile(
     "/tmp/audio.mp3"
   );
-  const fs = require("fs");
   const buffer = fs.readFileSync("/tmp/audio.mp3");
   return {
     statusCode: 200,
