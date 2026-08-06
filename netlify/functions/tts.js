@@ -88,17 +88,11 @@ exports.handler = async function(event) {
       "User-Agent": "Mozilla/5.0"
     }
   });
-  const buffer = await 
-  mp3.arrayBuffer();
-  console.log("MP3 size:", 
-  buffer.byteLength);
   return {
-  statusCode: 200,
+  statusCode: 302,
   headers: {
-    "Content-Type": "audio/mpeg",
-    "Content-Disposition": "inline"
+    "Location": mp3Url
   },
-  body: Buffer.from(buffer).toString("base64"),
-  isBase64Encoded: true
+  body: ""
 };
 };
