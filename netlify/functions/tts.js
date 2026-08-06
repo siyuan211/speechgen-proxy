@@ -9,13 +9,10 @@ exports.handler = async function(event) {
     };
   }
   const tts = new EdgeTTS();
-  await tts.synthesize(
-    text,
-    "ja-JP-NanamiNeural"
-  );
-  const audio = await tts.toFile(
-    "/tmp/audio.mp3"
-  );
+  await tts.synthesize(text, {
+    voice: "ja-JP-NanamiNeural"
+  });
+  await tts.toFile("/tmp/audio.mp3");
   const buffer = fs.readFileSync("/tmp/audio.mp3");
   return {
     statusCode: 200,
