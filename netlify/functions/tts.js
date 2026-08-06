@@ -98,3 +98,4 @@ exports.handler = async function(event) {
   body: Buffer.from(buffer).toString("base64"),
   isBase64Encoded: true
 };
+};
