@@ -90,11 +90,11 @@ exports.handler = async function(event) {
   });
   const buffer = await mp3.arrayBuffer();
   return {
-    statusCode: 200,
-    headers: {
-      "Content-Type": "audio/mpeg"
-    },
-    body: Buffer.from(buffer).toString("base64"),
-    isBase64Encoded: true
-  };
+  statusCode: 200,
+  headers: {
+    "Content-Type": "audio/mpeg",
+    "Content-Disposition": "inline"
+  },
+  body: Buffer.from(buffer).toString("base64"),
+  isBase64Encoded: true
 };
